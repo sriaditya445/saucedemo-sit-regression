@@ -37,6 +37,22 @@ jobs:
       - name: Execute SIT tests
         run: npm run test:sit
 
+      - name: Upload SIT HTML Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sit-playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload SIT Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sit-test-results
+          path: test-results/
+          retention-days: 30
+
   regression-testing:
     name: Regression Testing
     needs: sit-testing
@@ -60,3 +76,19 @@ jobs:
 
       - name: Execute Regression tests
         run: npm run test:regression
+
+      - name: Upload Regression HTML Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: regression-playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload Regression Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: regression-test-results
+          path: test-results/
+          retention-days: 30
