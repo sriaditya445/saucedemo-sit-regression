@@ -12,11 +12,14 @@ export class CartPage {
     );
   }
 
-  async verifyBackpack() {
-    await expect(
-      this.page.locator('[data-test="inventory-item-name"]')
-    ).toHaveText('Sauce Labs Backpack');
-  }
+  
+async verifyBackpack() {
+  await expect(
+    this.page.locator('[data-test="inventory-item-name"]')
+      .filter({ hasText: 'Sauce Labs Backpack' })
+  ).toHaveText('Sauce Labs Backpack');
+}
+
 
   async proceedToCheckout() {
     await this.checkoutButton.click();
